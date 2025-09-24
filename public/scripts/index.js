@@ -1,13 +1,13 @@
 import { $ } from "./common.js"
 
-$('#loginPageBtn').addEventListener('click', () => {
+$('#loginPageBtn').addEventListener('click', () => { //login page btn in navbar
   fetch('./templates/login.html')
     .then((res) => res.text())
     .then((html) => {
       $('#contentContainer').innerHTML = html
       import("./login/login.js").then((m) => m.default())
 
-      $('#goToSignup').addEventListener('click', (e) => {
+      $('#goToSignup').addEventListener('click', (e) => { //go to signup btn in login page
         e.preventDefault()
         fetch('./templates/signup.html')
           .then((r) => r.text())
@@ -15,7 +15,7 @@ $('#loginPageBtn').addEventListener('click', () => {
             $('#contentContainer').innerHTML = html
             import("./signup/signup.js").then((m) => m.default())
 
-            $('#goToLogin').addEventListener('click', (e) => {
+            $('#goToLogin').addEventListener('click', (e) => { //go to login btn in signup page
               e.preventDefault()
               fetch('./templates/login.html')
                 .then((rr) => rr.text())
@@ -33,14 +33,14 @@ $('#loginPageBtn').addEventListener('click', () => {
     })
 })
 
-$('#signupPageBtn')?.addEventListener('click', () => {
+$('#signupPageBtn').addEventListener('click', () => { // signup page btn in navbar
   fetch('./templates/signup.html')
     .then((res) => res.text())
     .then((html) => {
       $('#contentContainer').innerHTML = html
       import("./signup/signup.js").then((m) => m.default())
 
-      $('#goToLogin').addEventListener('click', (e) => {
+      $('#goToLogin').addEventListener('click', (e) => { //go to login btn in signup page
         e.preventDefault()
         fetch('./templates/login.html')
           .then((r) => r.text())
@@ -48,9 +48,9 @@ $('#signupPageBtn')?.addEventListener('click', () => {
             $('#contentContainer').innerHTML = html
             import("./login/login.js").then((m) => m.default())
 
-            $('#goToSignup').addEventListener('click', (e) => {
+            $('#goToSignup').addEventListener('click', (e) => { //goto signup button in login page
               e.preventDefault()
-              $('#signupPageBtn')?.click()
+              $('#signupPageBtn').click()
             })
           })
       })

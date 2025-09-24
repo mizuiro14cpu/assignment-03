@@ -1,7 +1,7 @@
 import { $ } from "../common.js"
 import loginFn from "../login/login.js"
 
-const signupFn = () => {
+const signupFn = () => { //signup function
   const form = $('#signupForm')
   const inputs = form.querySelectorAll("input")
 
@@ -10,9 +10,9 @@ const signupFn = () => {
       if (e.key === "Enter") {
         e.preventDefault()
         if (index < inputs.length - 1) {
-          inputs[index + 1].focus()
+          inputs[index + 1].focus() // if not on last field go to the next
         } else {
-          form.requestSubmit()
+          form.requestSubmit() //submit if on last field
         }
       }
     })
@@ -25,7 +25,7 @@ const signupFn = () => {
       return
     }
 
-    if ($('#password').value !== $('#repassword').value) {
+    if ($('#password').value !== $('#repassword').value) { //check if password match
       $('#repassword').setCustomValidity("Passwords do not match")
       form.classList.add('was-validated')
       return
@@ -33,7 +33,7 @@ const signupFn = () => {
       $('#repassword').setCustomValidity("")
     }
 
-    fetch('http://localhost:3000/signup', {
+    fetch('http://localhost:3000/signup', { //post request
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -48,11 +48,11 @@ const signupFn = () => {
       .then((res) => res.json())
       .then((data) => {
         alert(data.message)
-        if (data.message === "Signup successful!") {
+        if (data.message === "Signup successful!") { //check if successfull
           fetch('./templates/login.html')
             .then((res) => res.text())
             .then((fragments) => $('#contentContainer').innerHTML = fragments)
-            .then(loginFn)
+            .then(loginFn) //go to login page
         }
       })
       .catch((err) => console.error(err))

@@ -1,17 +1,17 @@
 import { $ } from "../common.js"
 
-const loginFn = () => {
+const loginFn = () => { //for login
   const form = $('#loginForm')
   const inputs = form.querySelectorAll("input")
 
   inputs.forEach((input, index) => {
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
-        e.preventDefault()
+        e.preventDefault() // if enter is pressed prevent default form submission
         if (index < inputs.length - 1) {
-          inputs[index + 1].focus()
+          inputs[index + 1].focus() //if not on final field go to next
         } else {
-          form.requestSubmit()
+          form.requestSubmit() //submit if in last field
         }
       }
     })
@@ -24,7 +24,7 @@ const loginFn = () => {
       return
     }
 
-    fetch('http://localhost:3000/login', {
+    fetch('http://localhost:3000/login', { //post request
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -36,7 +36,7 @@ const loginFn = () => {
       .then((data) => {
         alert(data.message)
         if (data.message.startsWith("Welcome")) {
-          fetch('./templates/home.html')
+          fetch('./templates/home.html') //redirect to home page
             .then((res) => res.text())
             .then((fragments) => $('#contentContainer').innerHTML = fragments)
         }
