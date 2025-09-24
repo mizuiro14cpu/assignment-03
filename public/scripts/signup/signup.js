@@ -1,7 +1,8 @@
 import { $ } from "../common.js"
+import loginFn from "../login/login.js"
 
-const loginFn = () => {
-  const form = $('#loginForm')
+const signupFn = () => {
+  const form = $('#signupForm')
   const inputs = form.querySelectorAll("input")
 
   inputs.forEach((input, index) => {
@@ -24,25 +25,38 @@ const loginFn = () => {
       return
     }
 
-    fetch('http://localhost:3000/login', {
+    if ($('#password').value !== $('#repassword').value) {
+      $('#repassword').setCustomValidity("Passwords do not match")
+      form.classList.add('was-validated')
+      return
+    } else {
+      $('#repassword').setCustomValidity("")
+    }
+
+    fetch('http://localhost:3000/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        firstname: $('#firstname').value,
+        lastname: $('#lastname').value,
         email: $('#email').value,
+        birthdate: $('#birthdate').value,
         password: $('#password').value,
+        repassword: $('#repassword').value,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         alert(data.message)
-        if (data.message.startsWith("Welcome")) {
-          fetch('./templates/home.html')
+        if (data.message === "Signup successful!") {
+          fetch('./templates/login.html')
             .then((res) => res.text())
             .then((fragments) => $('#contentContainer').innerHTML = fragments)
+            .then(loginFn)
         }
       })
       .catch((err) => console.error(err))
   })
 }
 
-export default loginFn
+export default signupFn

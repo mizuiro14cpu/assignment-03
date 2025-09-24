@@ -1,9 +1,23 @@
-<div>
-    <h1>Login page</h1>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow-lg w-50">
+    <h1 class="mb-3">Login</h1>
+    <form id="loginForm" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" required />
+        <div class="invalid-feedback">Please enter a valid email.</div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required />
+        <div class="invalid-feedback">Password is required.</div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
 
-    <div class="row">
-        <div class="col">username</div>
-        <div class="col"><input id="username" class="rounded-pill"/></div>
-    </div>
-    <div class="row mt-5"><button id="loginBtn">login!</button></div>
+    <p class="mt-3 text-center">
+      Don’t have an account?
+      <a href="#" id="goToSignup">Sign up here</a>
+    </p>
+  </div>
 </div>
